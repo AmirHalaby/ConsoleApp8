@@ -11,8 +11,11 @@ namespace ConsoleApp8
         /// <summary>
         /// A method returns songs in random order
         /// </summary>
-        public static IList<Song> GetRandomSongList(IList<Song> songs)
+        public static IList<Song>? GetRandomSongList(IList<Song> songs)
         {
+            if (songs == null) return default;
+            if(songs.Count == 0) return default;
+            if (songs.Count == 1) return songs;
             Random random = new Random();
             int[] songsNumber = new int[songs.Count];
             List<Song> list = new List<Song>();
@@ -26,6 +29,7 @@ namespace ConsoleApp8
                 {
                     if (randomTempNumber == songs.Count - 1)
                         randomTempNumber = 0;
+                    // Look for a free place in the array.
                     while (songsNumber[randomTempNumber] != 0)
                     {
                         if (randomTempNumber == songs.Count - 1)
@@ -35,7 +39,6 @@ namespace ConsoleApp8
                     }
                 }
                 songsNumber[randomTempNumber] = i;
-                Console.WriteLine(randomTempNumber + " , " + i);
             }
             // Arrange the songs according to the arrangement of the random numbers
             for (int i = 0; i < songs.Count; i++)

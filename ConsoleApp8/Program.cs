@@ -1,13 +1,24 @@
 ﻿
-
+    
 using ConsoleApp8;
 using System.Security.Cryptography.X509Certificates;
 
 //Exercise 1
 
+//string[] balls = { "Green", "Yecllow", "Red", "Yellow", "Green", "Red", "Green", "Red", "Green" };
 string[] balls = { "Green", "Yellow", "Red", "Yellow", "Green", "Red", "Green", "Red", "Green" };
 
-SortArrayByColor.SortArray(balls);
+//string[] balls = { "Red", "Yellow" };
+//string[] balls = { "Yellow" };
+//string[] balls = { "Red", "Yellow", "Red", "Yellow", "Green", "Red", "Green", "Red", "Yellow" };
+try
+{
+    var x = SortArrayByColor.SortArray(balls);
+}
+catch(Exception e)
+{
+    Console.WriteLine(e.ToString());
+}
 
 
 //Exercise 2
@@ -19,7 +30,7 @@ songs.Add(new Song("Halaby"));
 songs.Add(new Song("rEEMA"));
 songs.Add(new Song("Kamal"));
 songs.Add(new Song("Amin"));
-songs.Add(new Song("Wazira"));
+songs.Add(new Song("Adam"));
 songs.Add(new Song("Adham"));
 songs.Add(new Song("Enbal"));
 songs.Add(new Song("Dan"));

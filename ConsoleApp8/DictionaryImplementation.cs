@@ -15,41 +15,41 @@ namespace ConsoleApp8
 {
     public class DictionaryImplementation<k, v> : IEnumerable<KeyValuePair<k, v>>
     {
-        LinkedList<KeyValuePair<k, v>> values;
+        LinkedList<KeyValuePair<k, v>> Values;
         public DictionaryImplementation()
         {
-            this.values = new LinkedList<KeyValuePair<k, v>>();
+            this.Values = new LinkedList<KeyValuePair<k, v>>();
         }
 
         public void Set(k key, v value)
         {
-            if(this.values == null)
+            if(this.Values == null)
             {
-                this.values = new LinkedList<KeyValuePair<k, v>>();
+                this.Values = new LinkedList<KeyValuePair<k, v>>();
             }
-            var keyExistAlready = this.values.Any(p => p.Key.Equals(key));
+            var keyExistAlready = this.Values.Any(p => p.Key.Equals(key));
             if (keyExistAlready)
             {
                 throw new InvalidOperationException("Key already exists. you cannot add 2 elements with the same key");
             }
-            this.values.AddLast(new KeyValuePair<k, v>(key, value));
+            this.Values.AddLast(new KeyValuePair<k, v>(key, value));
         }
 
         public v? Get(k key)
         {
-            if (this.values == null)
+            if (this.Values == null)
                 return default(v);
-            var collection = this.values;
+            var collection = this.Values;
             return collection.First(p => p.Key.Equals(key)).Value;
         }
 
         public void SetAll(v value)
         {
             var collection = new LinkedList<KeyValuePair<k, v>>();
-            foreach (var val in values)
+            foreach (var val in Values)
                 collection.AddLast(new KeyValuePair<k, v>(val.Key, value));
             
-            this.values.Clear();
+            this.Values.Clear();
 
             foreach (var col in collection)
                 Set(col.Key, value);

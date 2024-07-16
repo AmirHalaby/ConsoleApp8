@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DocumentFormat.OpenXml.Drawing;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,11 +7,9 @@ using System.Threading.Tasks;
 
 namespace ConsoleApp8
 {
-    /*
-     * To-Do ex 1:
-     *  check anther setoation if the ansuar is correct.
-     * 
-     */
+    class Color
+    {
+    }
 
     public class Song
     {
@@ -25,12 +24,15 @@ namespace ConsoleApp8
     {
         public static string[]? SortArray(string[] balls)
         {
+            
             if (balls == null)
                 return default;
             if(balls.Length < 2)
             {
                 return balls;
             }
+            if (!(CheckIfExistIncorrectBall(balls)))
+                throw new Exception("Inserted an illegal ball, can insert Green Yellow or Red colors.");
             return orderByBall( orderByBall(balls, "Green"), "Yellow");
         }
 
@@ -42,16 +44,18 @@ namespace ConsoleApp8
         {
             int i = 0;
             int j = balls.Length - 1;
-            
+            //The algorithm arranges one type at the beginning of the array and a second type on the other side of the array
             while (!(i == j))
             {
                 if (str == "Yellow" && balls[i] == "Green")
                 {
                     i++;
+                    continue;
                 }
                 if (balls[i] == str)
                 {
                     i++;
+                    continue;
                 }
                 if (balls[i] == "Red")
                 {
@@ -60,6 +64,7 @@ namespace ConsoleApp8
                         balls[i] = balls[j];
                         balls[j] = "Red";
                         i++;
+                        continue;
                     }
                     else
                     {
@@ -81,6 +86,17 @@ namespace ConsoleApp8
                 }
             }
             return balls;
+        }
+        private static bool CheckIfExistIncorrectBall(string[] balls)
+        {
+            foreach(string ball in balls)
+            {
+                if (ball == "Yellow" || ball == "Red" || ball == "Green")
+                    continue;
+                else
+                    return false;
+            }            
+            return true;
         }
     }
 }

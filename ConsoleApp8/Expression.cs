@@ -25,43 +25,43 @@ namespace ConsoleApp8
         {
             if (str == null) { return true; }
             if (str.Length == 0) { return true; }
-            char[] OpenParenthesis = {  '{', '[', '|' };
-            char[] CloseParenthesis = { '}', ']', '|' };
+            char[] openParenthesis = {  '{', '[', '|' };
+            char[] closeParenthesis = { '}', ']', '|' };
             bool counterSpecialParenthesis = false;
-            Stack<char> OpenParenthesisStack = new Stack<char>();
+            Stack<char> openParenthesisStack = new Stack<char>();
             for(int i=0; i < str.Length; i++)
             {
                 // When open parenthesis insert into the stack
                 // The special Parenthesis check if is odd and inert into the stack also. 
-                if (str[i] == OpenParenthesis[2] && counterSpecialParenthesis ==false)
+                if (str[i] == openParenthesis[2] && counterSpecialParenthesis ==false)
                 {
                     counterSpecialParenthesis = true;
-                    OpenParenthesisStack.Push(str[i]);
+                    openParenthesisStack.Push(str[i]);
                     continue;
                 }
-                if (str[i] == OpenParenthesis[0]  || str[i] == OpenParenthesis[1])
+                if (str[i] == openParenthesis[0]  || str[i] == openParenthesis[1])
                 {
-                    OpenParenthesisStack.Push(str[i]);
+                    openParenthesisStack.Push(str[i]);
                 }
                 // When holding close parenthesis we will match it to the last parenthesis opened that located first parenthes in stack.
-                if (str[i] == CloseParenthesis[0])
+                if (str[i] == closeParenthesis[0])
                 {
-                    if (OpenParenthesisStack.Pop() != OpenParenthesis[0])
+                    if (openParenthesisStack.Pop() != openParenthesis[0])
                         return false;
                 }
-                if (str[i] == CloseParenthesis[1])
+                if (str[i] == closeParenthesis[1])
                 {
-                    if (OpenParenthesisStack.Pop() != OpenParenthesis[1])
+                    if (openParenthesisStack.Pop() != openParenthesis[1])
                         return false;
                 }
-                if (str[i] == CloseParenthesis[2] && counterSpecialParenthesis == true)
+                if (str[i] == closeParenthesis[2] && counterSpecialParenthesis == true)
                 {
                     counterSpecialParenthesis = false;
-                    if (OpenParenthesisStack.Pop() != OpenParenthesis[2])
+                    if (openParenthesisStack.Pop() != openParenthesis[2])
                         return false;
                 }
             }
-            return (OpenParenthesisStack.Count == 0) ? true : false;
+            return (openParenthesisStack.Count == 0) ? true : false;
              
         }
     }

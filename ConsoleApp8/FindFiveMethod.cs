@@ -28,6 +28,7 @@ namespace ConsoleApp8
 
     public class FindFiveMethod
     {
+        private const int PERSONS_TO_RETURN = 5;
         public static IList<string> findfive(IList<People> persons)
         {
             var watchForParallel = Stopwatch.StartNew();
@@ -51,12 +52,12 @@ namespace ConsoleApp8
             {
                 if (Verify(Person.Name))
                     result.Add(Person.Name);
-                if(result.Count == 5)
+                if(result.Count == PERSONS_TO_RETURN)
                 {
                     // Run a task so that we can cancel from another thread.
                     Task.Factory.StartNew(() =>
                     {
-                            cts.Cancel();
+                        cts.Cancel();
                     });
                 }
                     
